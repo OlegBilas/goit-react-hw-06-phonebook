@@ -1,0 +1,54 @@
+@import-normalize; /* bring in normalize.css styles */
+
+:root {
+  --mobile: 320px;
+  --tablet: 768px;
+  --desktop: 1280px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a,
+button {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  cursor: pointer;
+  padding: 2 px 10px;
+  background-color: rgba(19, 55, 201, 0.497);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
