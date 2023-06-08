@@ -20,7 +20,7 @@ export function App() {
     if (contacts.find(({ name }) => name === data.name)) {
       return alert(`${data.name} is already in contacts`);
     }
-    setContacts([data, ...contacts]);
+    setContacts([data, ...contacts]); // addContact
   };
 
   useEffect(() => {
