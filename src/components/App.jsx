@@ -16,13 +16,6 @@ export function App() {
   const [contacts, setContacts] = useState(initialContacts);
   const [filter, setFilter] = useState('');
 
-  const onSubmit = data => {
-    if (contacts.find(({ name }) => name === data.name)) {
-      return alert(`${data.name} is already in contacts`);
-    }
-    setContacts([data, ...contacts]); // addContact
-  };
-
   useEffect(() => {
     const data = localStorage.getItem('contacts');
     if (data) {
@@ -34,38 +27,14 @@ export function App() {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const handleChangeFilter = e => {
-    setFilter(e.target.value);
-  };
-
-  const filteredContacts = () => {
-    if (filter) {
-      const normalizedFilter = filter.toLowerCase();
-      return contacts
-        .filter(contact =>
-          contact.name.toLowerCase().includes(normalizedFilter)
-        )
-        .sort((a, b) => a.name.localeCompare(b.name));
-    } else {
-      return contacts.sort((a, b) => a.name.localeCompare(b.name));
-    }
-  };
-
-  const removeContact = idx => {
-    const contactsWithoutRemovedContact = contacts.filter(
-      contact => contact.id !== idx
-    );
-    setContacts(contactsWithoutRemovedContact);
-  };
-
   return (
     <Wrapper>
       <TitlePhonebook>Phonebook</TitlePhonebook>
       <ContactForm onSubmit={onSubmit} />
 
       <TitleContacts>Contacts</TitleContacts>
-      <Filter filter={filter} onChange={handleChangeFilter} />
-      <ContactList contacts={filteredContacts()} onRemove={removeContact} />
+      <Filter />
+      <ContactList />
     </Wrapper>
   );
 }
