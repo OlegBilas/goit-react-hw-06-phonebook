@@ -3,14 +3,12 @@ import React from 'react';
 import { List, Item, Name, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'redux/contacts/contactsSlice';
-import { getContacts } from 'redux/contacts/selectors';
+import { getContacts, getFilter } from 'redux/selectors';
 
 const ContactList = () => {
-  const filter = useSelector(state => {
-    console.log(state);
-    return state.filter;
-  });
+  const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
+  console.log(contacts);
 
   const dispatch = useDispatch();
 

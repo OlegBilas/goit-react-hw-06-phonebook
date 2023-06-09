@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { persistReducer } from 'redux-persist';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -21,4 +23,13 @@ const contactsSlice = createSlice({
 });
 
 export const { addContact, removeContact } = contactsSlice.actions;
-export const contactsReducer = contactsSlice.reducer;
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+export const contactsReducer = persistReducer(
+  persistConfig,
+  contactsSlice.reducer
+);
