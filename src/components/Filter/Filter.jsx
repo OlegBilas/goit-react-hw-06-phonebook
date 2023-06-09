@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { Label, Input } from 'components/ContactForm/ContactForm.styled';
 import { setFilter } from 'redux/filter/filterSlice';
 import { useDispatch } from 'react-redux';
@@ -22,10 +21,5 @@ const Filter = () => {
     </>
   );
 };
-
-// Filter.propTypes = {
-//   filter: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
 
 export default Filter;

@@ -1,5 +1,3 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
 import { List, Item, Name, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'redux/contacts/contactsSlice';
@@ -13,13 +11,10 @@ const ContactList = () => {
   const filteredContacts = () => {
     if (filter) {
       const normalizedFilter = filter.toLowerCase();
-      return contacts
-        .filter(contact =>
-          contact.name.toLowerCase().includes(normalizedFilter)
-        )
-        .sort((a, b) => a.name.localeCompare(b.name));
+      return contacts.filter(contact =>
+        contact.name.toLowerCase().includes(normalizedFilter)
+      );
     } else {
-      //return contacts.sort((a, b) => a.name.localeCompare(b.name));
       return contacts;
     }
   };
@@ -36,16 +31,5 @@ const ContactList = () => {
     </List>
   );
 };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.exact({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onRemove: PropTypes.func.isRequired,
-// };
 
 export default ContactList;
