@@ -16,6 +16,7 @@ const contactsSlice = createSlice({
   initialState: initialBook,
   reducers: {
     addContact(state, action) {
+      console.log(state.contacts);
       return [action.payload, ...state.contacts];
     },
     removeContact(state, action) {
