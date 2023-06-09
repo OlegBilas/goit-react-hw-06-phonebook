@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Label, Input } from 'components/ContactForm/ContactForm.styled';
 import { setFilter } from 'redux/filter/filterSlice';
 import { useDispatch } from 'react-redux';

@@ -1,36 +1,36 @@
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Form, Label, Input } from './ContactForm.styled';
-import { getContacts } from 'redux/selectors';
-import { useDispatch } from 'react-redux';
+import { getContacts } from 'redux/contacts/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contactsSlice';
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [nameForm, setNameForm] = useState('');
+  const [numberForm, setNumberForm] = useState('');
 
-  const contacts = useSelector(getContacts());
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target;
-    if (name === 'name') {
-      setName(value);
+    if (name === 'nameForm') {
+      setNameForm(value);
     }
-    if (name === 'number') {
-      setNumber(value);
+    if (name === 'numberForm') {
+      setNumberForm(value);
     }
   };
 
   const handleSubmit = e => {
-    if (contacts.find(({ name }) => name === data.name)) {
-      return alert(`${data.name} is already in contacts`);
+    if (contacts.find(({ name }) => name === nameForm)) {
+      return alert(`${nameForm} is already in contacts`);
     }
     e.preventDefault();
-    dispatch(addContact({ id: nanoid(), name, number }));
-    setName('');
-    setNumber('');
+    dispatch(addContact({ id: nanoid(), name: nameForm, number: numberForm }));
+    setNameForm('');
+    setNumberForm('');
   };
 
   const idName = nanoid();
@@ -41,8 +41,8 @@ export default function ContactForm() {
       <Input
         id={idName}
         type="text"
-        name="name"
-        value={name}
+        name="nameForm"
+        value={nameForm}
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
@@ -53,15 +53,15 @@ export default function ContactForm() {
       <Input
         id={idNumber}
         type="tel"
-        name="number"
-        value={number}
+        name="numberForm"
+        value={numberForm}
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         onChange={handleChange}
       />
 
-      <button type="submit" disabled={!name || !number}>
+      <button type="submit" disabled={!nameForm || !numberForm}>
         Add contact
       </button>
     </Form>

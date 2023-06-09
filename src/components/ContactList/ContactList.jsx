@@ -1,13 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { List, Item, Name, Number } from './ContactList.styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'redux/contacts/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { getContacts } from 'redux/contacts/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts());
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(state => {
+    console.log(state);
+    return state.filter;
+  });
+  const contacts = useSelector(getContacts);
 
   const dispatch = useDispatch();
 
@@ -20,13 +23,14 @@ const ContactList = () => {
         )
         .sort((a, b) => a.name.localeCompare(b.name));
     } else {
-      return contacts.sort((a, b) => a.name.localeCompare(b.name));
+      //return contacts.sort((a, b) => a.name.localeCompare(b.name));
+      return contacts;
     }
   };
 
   return (
     <List>
-      {filteredContacts.map(({ id, name, number }) => (
+      {filteredContacts().map(({ id, name, number }) => (
         <Item key={id}>
           <Name>{name}:</Name>
           <Number>{number}</Number>
