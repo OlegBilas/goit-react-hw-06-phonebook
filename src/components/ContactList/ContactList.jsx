@@ -8,7 +8,6 @@ import { getContacts, getFilter } from 'redux/selectors';
 const ContactList = () => {
   const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-  console.log(contacts);
   const dispatch = useDispatch();
 
   const filteredContacts = () => {
