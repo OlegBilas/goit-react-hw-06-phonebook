@@ -7,30 +7,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contactsSlice';
 
 export default function ContactForm() {
-  const [nameForm, setNameForm] = useState('');
-  const [numberForm, setNumberForm] = useState('');
+  const initialState = { name: '', number: '' };
+  const [contact, setContact] = useState(initialState);
 
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    if (name === 'nameForm') {
-      setNameForm(value);
-    }
-    if (name === 'numberForm') {
-      setNumberForm(value);
-    }
+    setContact(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = e => {
-    if (contacts.find(({ name }) => name === nameForm)) {
-      return alert(`${nameForm} is already in contacts`);
+    if (contacts.find(({ name }) => name === contact.name)) {
+      return alert(`${contact.name} is already in contacts`);
     }
     e.preventDefault();
-    dispatch(addContact({ id: nanoid(), name: nameForm, number: numberForm }));
-    setNameForm('');
-    setNumberForm('');
+    dispatch(
+      addContact({ id: nanoid(), name: contact.name, number: contact.number })
+    );
+    setContact(initialState);
   };
 
   const idName = nanoid();
@@ -41,8 +39,8 @@ export default function ContactForm() {
       <Input
         id={idName}
         type="text"
-        name="nameForm"
-        value={nameForm}
+        name="name"
+        value={contact.name}
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
@@ -53,15 +51,15 @@ export default function ContactForm() {
       <Input
         id={idNumber}
         type="tel"
-        name="numberForm"
-        value={numberForm}
+        name="number"
+        value={contact.number}
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         onChange={handleChange}
       />
 
-      <button type="submit" disabled={!nameForm || !numberForm}>
+      <button type="submit" disabled={!contact.name || !contact.number}>
         Add contact
       </button>
     </Form>
